@@ -1,14 +1,8 @@
-# clojure-experiment
+# lambda-clj-example
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure function fronted by AWS API Gateway.
 
-## Usage
+Example stitched together from the following blogs:
 
-FIXME
-
-## License
-
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+[Writing AWS Lambda Functions in Clojure](https://aws.amazon.com/blogs/compute/clojure/)
+[Walkthrough: API Gateway and Lambda Functions](http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html#getting-started-new-api)
