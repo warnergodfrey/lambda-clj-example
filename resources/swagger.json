@@ -1,0 +1,91 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "lambda-clj-example",
+        "description": "Say Hello",
+        "version": "1.0.0"
+    },
+    "host": "api.uber.com",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security" : [{
+        "api_key" : []
+    }],
+    "securityDefinitions" : {
+        "api_key": {
+            "type": "apiKey",
+            "name": "x-api-key",
+            "in": "header"
+        }
+    },
+    "paths": {
+        "/clj-hello": {
+            "post": {
+                "summary": "Say Hello",
+                "description": "Say Hello",
+                "responses": {
+                    "200": {
+                        "description": "Greeting",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "headers" : {
+                            "test-method-response-header" : {
+                                "type" : "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security" : [{
+                    "api_key" : []
+                }],
+                "x-amazon-apigateway-auth" : {
+                    "type" : "none"
+                },
+                "x-amazon-apigateway-integration" : {
+                    "type" : "aws",
+                    "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:425063463218:function:clj-hello/invocations",
+                    "httpMethod" : "POST",
+                    "credentials" : "arn:aws:iam::425063463218:role/lambda_exec_role",
+                    "responses" : {
+                        "default" : {
+                            "statusCode" : "200"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
